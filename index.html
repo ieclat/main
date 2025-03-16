@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eclat</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        body {
+            font-family: 'Nanum Pen Script', cursive;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 300;
+        }
+
+        .header {
+            background-color: #ffffff;
+            color: #000000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            padding: 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .empty-space {
+            min-width: 200px;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 1rem 0;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #000000;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+            position: relative;
+            padding: 0 50px;
+            margin-bottom: 1rem;
+        }
+
+        .brand-subtitle::before,
+        .brand-subtitle::after {
+            content: "";
+            height: 1px;
+            background-color: #000000;
+            display: block;
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 150px);
+        }
+
+        .brand-subtitle::before {
+            left: 0;
+        }
+
+        .brand-subtitle::after {
+            right: 0;
+        }
+
+        .logo {
+            font-size: 4rem;
+            letter-spacing: 2px;
+            color: #000000;
+            text-decoration: none !important;
+            display: inline-block;
+        }
+
+        .logo:hover, .logo:visited, .logo:active {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            min-width: 200px;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .user-actions a {
+            text-decoration: none;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.5rem;
+            font-family: 'Nanum Pen Script', cursive;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .nav {
+            padding: 0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 0 auto;
+            padding: 1rem 0;
+            max-width: 1400px;
+        }
+
+        .nav-links a {
+            color: #000000;
+            text-decoration: none;
+            font-family: 'Nanum Pen Script', cursive;
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #666666;
+        }
+
+        .subtitle-section {
+            position: fixed;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            z-index: 999;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .posts-section {
+            margin-top: 180px;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .posts-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 2px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .post-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .post-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            background-color: #f5f5f5;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .post-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .shop-all-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 1rem 3rem;
+            background: none;
+            border: 1px solid #000;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .shop-all-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* 햄버거 메뉴 스타일 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #000000;
+            margin: 2px 0;
+            transition: 0.4s;
+        }
+
+        /* 모바일 메뉴가 열렸을 때의 햄버거 아이콘 애니메이션 */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .hero {
+            height: 100vh;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #000000;
+            padding: 2rem;
+            padding-top: 50px;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: calc(100vh - 180px);
+            object-fit: cover;
+            margin-top: 180px;
+        }
+
+        .hero-content {
+            display: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #333333;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #333333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .features h2 {
+            color: #000000;
+            font-size: 2rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: #000000;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 1rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .subtitle-section {
+                top: 70px;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .posts-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .posts-section {
+                margin-top: 140px;
+                padding: 0 1rem;
+            }
+
+            .posts-title {
+                font-size: 1.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .features {
+                padding: 4rem 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .features h2 {
+                font-size: 1.75rem;
+                margin-bottom: 3rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .user-actions {
+                min-width: auto;
+            }
+
+            .user-actions a {
+                font-size: 1.5rem;
+            }
+
+            .user-actions a .material-icons {
+                font-size: 24px;
+            }
+
+            .empty-space {
+                min-width: auto;
+                width: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .posts-title {
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
+            }
+
+            .user-actions a span:not(.material-icons) {
+                display: none;
+            }
+
+            .user-actions a .material-icons {
+                font-size: 24px;
+            }
+
+            .user-actions {
+                margin-left: 10px;
+            }
+        }
+
+        .dropdown-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown-menu.active {
+            height: 100vh;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 1.2rem;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .dropdown-menu.active a {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            color: #666;
+            transform: scale(1.1);
+        }
+
+        .menu-toggle {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: #000;
+            transition: all 0.4s ease;
+            transform-origin: left;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .user-actions a .material-icons {
+            font-size: 24px;
+        }
+
+        .brand-intro {
+            margin-top: 100px;
+            padding: 2rem;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .brand-intro-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            margin-top: 2rem;
+            font-size: 2rem;
+            line-height: 1.5;
+            color: #000000;
+        }
+
+        .intro-text p:first-child {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .brand-intro {
+                margin-top: 80px;
+                padding: 1.5rem;
+            }
+
+            .intro-text {
+                font-size: 1.5rem;
+            }
+
+            .intro-text p:first-child {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-intro {
+                margin-top: 60px;
+                padding: 1rem;
+            }
+
+            .intro-text {
+                font-size: 1.2rem;
+            }
+
+            .intro-text p:first-child {
+                font-size: 1.5rem;
+            }
+        }
+
+        .featured-items {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .section-title .line {
+            height: 1px;
+            background-color: #000000;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            text-align: center;
+        }
+
+        .product-image {
+            position: relative;
+            margin-bottom: 1.5rem;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: "제품보기";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-image:hover::after {
+            opacity: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: #000000;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background: none;
+            border: 1px solid #000;
+            padding: 0.8rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        .add-to-cart:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .shop-all-container {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .featured-items {
+                padding: 3rem 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .featured-items {
+                padding: 2rem 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                gap: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title .line {
+                max-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="empty-space">
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="logo-container">
+                <a href="#" class="logo">eclat</a>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="login">
+                    <span class="material-icons">person</span>
+                    Log In
+                </a>
+            </div>
+        </div>
+        <div class="dropdown-menu">
+            <a href="#all">전체보기</a>
+            <a href="#bag">가방</a>
+            <a href="#clothes">의류</a>
+            <a href="#shoes">신발</a>
+            <a href="#watch">시계</a>
+            <a href="#accessories">악세사리</a>
+        </div>
+    </header>
+
+    <section class="brand-intro">
+        <div class="brand-intro-content">
+
+        </div>
+    </section>
+
+    <section class="featured-items">
+        <div class="section-title">
+            <span class="line"></span>
+            <h2>UPDATE</h2>
+            <span class="line"></span>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Lola Pants">
+                </div>
+                <h3 class="product-name">샤넬</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Tote Bag">
+                </div>
+                <h3 class="product-name">구찌</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image best-seller">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Anna Blouse">
+                </div>
+                <h3 class="product-name">루이비통</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image best-seller">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Anna Blouse">
+                </div>
+                <h3 class="product-name">에르메스</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 5">
+                </div>
+                <h3 class="product-name">프라다</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 6">
+                </div>
+                <h3 class="product-name">발렌시아가</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 7">
+                </div>
+                <h3 class="product-name">펜디</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 8">
+                </div>
+                <h3 class="product-name">생로랑</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 9">
+                </div>
+                <h3 class="product-name">디올</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 10">
+                </div>
+                <h3 class="product-name">보테가베네타</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 11">
+                </div>
+                <h3 class="product-name">미우미우</h3>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="badge">NEW</span>
+                    <img src="111.jpg" alt="Product 12">
+                </div>
+                <h3 class="product-name">톰브라운</h3>
+            </div>
+        </div>
+        <div class="shop-all-container">
+            <a href="#" class="shop-all-btn">전체보기</a>
+        </div>
+    </section>
+
+    <script>
+        // 스크롤 시 헤더 스타일 변경
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = '#ffffff';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                header.style.backgroundColor = '#ffffff';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // 상단 메뉴 토글
+        const menuToggle = document.querySelector('.menu-toggle');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            dropdownMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        // 메뉴 링크 클릭시 메뉴 닫기
+        document.querySelectorAll('.dropdown-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                dropdownMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html> 
