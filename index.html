@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eclat</title>
+    <title>SIRUSHOP#</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <!-- Google Material Icons -->
@@ -31,6 +31,8 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .top-bar {
@@ -40,6 +42,7 @@
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
+            height: 100px;
         }
 
         .empty-space {
@@ -92,16 +95,25 @@
         }
 
         .logo {
-            font-size: 4rem;
+            font-size: 4.5rem;
             letter-spacing: 2px;
-            color: #000000;
+            background: linear-gradient(to right, #005dad, #dc2626);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-decoration: none !important;
             display: inline-block;
+            text-align: center;
+            line-height: 1;
+            transition: all 0.3s ease;
         }
 
         .logo:hover, .logo:visited, .logo:active {
             text-decoration: none;
-            color: #000000;
+            background: linear-gradient(to right, #dc2626, #005dad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .user-actions {
@@ -222,23 +234,46 @@
         }
 
         .shop-all-btn {
-            display: block;
-            width: fit-content;
-            margin: 0 auto;
-            padding: 1rem 3rem;
             background: none;
-            border: 1px solid #000;
-            color: #000;
-            text-decoration: none;
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            border: 1px solid #dc2626;
+            padding: 0.8rem 2rem;
+            font-size: 1.5rem;
+            cursor: pointer;
             transition: all 0.3s ease;
+            font-family: 'Nanum Pen Script', cursive;
+            color: #dc2626;
+            text-decoration: none;
         }
 
         .shop-all-btn:hover {
-            background: #000;
-            color: #fff;
+            background: linear-gradient(45deg, #005dad, #dc2626);
+            color: #fff !important;
+            border: none;
+        }
+
+        .shop-all-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(0, 93, 173, 0.2);
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .shop-all-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
         }
 
         /* 햄버거 메뉴 스타일 */
@@ -252,7 +287,7 @@
         .hamburger span {
             width: 25px;
             height: 3px;
-            background-color: #000000;
+            background-color: #023276;
             margin: 2px 0;
             transition: 0.4s;
         }
@@ -367,16 +402,51 @@
         }
 
         @media (max-width: 768px) {
+            .empty-space {
+                min-width: 50px;
+                position: absolute;
+                left: 0;
+                padding-left: 15px;
+                z-index: 1002;
+            }
+
             .top-bar {
-                padding: 1rem;
+                padding: 1rem 2rem;
+                height: 80px;
+                position: relative;
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+            }
+
+            .logo-container {
+                padding: 0;
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                pointer-events: auto;
+                z-index: 1000;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
+
+            .logo {
+                font-size: 3.5rem;
+                position: relative;
+                transform: none;
+            }
+
+            .user-actions {
+                min-width: 50px;
+                position: absolute;
+                right: 0;
             }
 
             .hamburger {
                 display: flex;
-            }
-
-            .logo {
-                font-size: 3rem;
             }
 
             .nav {
@@ -440,9 +510,11 @@
                 font-size: 24px;
             }
 
-            .empty-space {
-                min-width: auto;
-                width: 30px;
+            .menu-toggle {
+                position: relative;
+                z-index: 1002;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
             }
         }
 
@@ -452,7 +524,7 @@
             }
 
             .logo {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
             .btn {
@@ -498,6 +570,8 @@
             visibility: hidden;
             z-index: 999;
             backdrop-filter: blur(10px);
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .dropdown-menu.active {
@@ -509,7 +583,10 @@
         .dropdown-menu a {
             display: block;
             padding: 1.2rem;
-            color: #000;
+            background: linear-gradient(to right, #005dad, #dc2626);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-decoration: none;
             font-family: 'Nanum Pen Script', cursive;
             font-size: 2rem;
@@ -528,7 +605,10 @@
         }
 
         .dropdown-menu a:hover {
-            color: #666;
+            background: linear-gradient(to right, #dc2626, #005dad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             transform: scale(1.1);
         }
 
@@ -547,9 +627,13 @@
         .menu-toggle span {
             width: 100%;
             height: 2px;
-            background-color: #000;
+            background: linear-gradient(to right, #005dad, #dc2626);
             transition: all 0.4s ease;
             transform-origin: left;
+        }
+
+        .menu-toggle.active span {
+            background: linear-gradient(to right, #dc2626, #005dad);
         }
 
         .menu-toggle.active span:nth-child(1) {
@@ -628,7 +712,7 @@
         }
 
         .featured-items {
-            padding: 4rem 2rem;
+            padding: 0 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -638,7 +722,7 @@
             align-items: center;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         .section-title h2 {
@@ -646,11 +730,15 @@
             font-weight: 400;
             letter-spacing: 2px;
             white-space: nowrap;
+            background: linear-gradient(to right, #005dad, #dc2626);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .section-title .line {
             height: 1px;
-            background-color: #000000;
+            background: linear-gradient(to right, #005dad, #dc2626);
             width: 100%;
             max-width: 600px;
         }
@@ -659,7 +747,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .product-card {
@@ -680,7 +768,7 @@
             left: 0;
             width: 100%;
             height: 40px;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(45deg, #005dad, #dc2626);
             color: white;
             display: flex;
             justify-content: center;
@@ -709,7 +797,7 @@
             position: absolute;
             top: 1rem;
             left: 1rem;
-            background-color: #000000;
+            background: linear-gradient(45deg, #005dad, #dc2626);
             color: white;
             padding: 0.5rem 1rem;
             font-size: 1rem;
@@ -721,6 +809,7 @@
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
             font-weight: 400;
+            color: #005dad;
         }
 
         .product-price {
@@ -746,11 +835,12 @@
 
         .shop-all-container {
             text-align: center;
+            margin-bottom: 4rem;
         }
 
         @media (max-width: 768px) {
             .featured-items {
-                padding: 3rem 1.5rem;
+                padding: 1.5rem 1.5rem;
             }
 
             .products-grid {
@@ -765,7 +855,7 @@
 
         @media (max-width: 480px) {
             .featured-items {
-                padding: 2rem 1rem;
+                padding: 1rem 1rem;
             }
 
             .products-grid {
@@ -785,6 +875,194 @@
                 max-width: 100px;
             }
         }
+
+        .logo-banner {
+            margin-top: 100px;
+            margin-bottom: 2rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .logo-banner-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            margin-bottom: 0.5rem;
+            object-fit: contain;
+        }
+
+        .logo-banner-text {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-top: 0.5rem;
+            background: linear-gradient(45deg, #005dad, #dc2626);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.5;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .logo-banner {
+                margin-top: 80px;
+                margin-bottom: 40px;
+                padding: 0 15px;
+            }
+            .logo-banner-img {
+                max-width: 600px;
+            }
+            .logo-banner-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-banner {
+                margin-top: 70px;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+            .logo-banner-img {
+                max-width: 100%;
+            }
+            .logo-banner-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* 맨 위로 가기 버튼 스타일 */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(220, 38, 38, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: #dc2626;
+            transform: translateY(-3px);
+        }
+
+        .scroll-to-top .material-icons {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* 텔레그램 버튼 스타일 */
+        .telegram-button {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+
+        /* LINE 버튼 스타일 */
+        .line-button {
+            position: fixed;
+            bottom: 170px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+
+        /* 카카오톡 버튼 스타일 */
+        .kakao-button {
+            position: fixed;
+            bottom: 240px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+
+        .telegram-button img,
+        .line-button img,
+        .kakao-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .telegram-button:hover,
+        .line-button:hover,
+        .kakao-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .scroll-to-top, .telegram-button, .line-button, .kakao-button {
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+            .telegram-button {
+                bottom: 80px;
+            }
+            .line-button {
+                bottom: 140px;
+            }
+            .kakao-button {
+                bottom: 200px;
+            }
+            .scroll-to-top {
+                bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -798,28 +1076,32 @@
                 </div>
             </div>
             <div class="logo-container">
-                <a href="#" class="logo">eclat</a>
+                <a href="index.html" class="logo">SIRUSHOP#</a>
             </div>
             <div class="user-actions">
-                <a href="#" class="login">
-                    <span class="material-icons">person</span>
-                    Log In
-                </a>
             </div>
         </div>
         <div class="dropdown-menu">
-            <a href="#all">전체보기</a>
-            <a href="#bag">가방</a>
-            <a href="#clothes">의류</a>
-            <a href="#shoes">신발</a>
-            <a href="#watch">시계</a>
-            <a href="#accessories">악세사리</a>
+            <a href="all.html">전체 아이템</a>
+            <a href="bags.html">가방</a>
+            <a href="clothes.html">의류</a>
+            <a href="shoes.html">신발</a>
+            <a href="watches.html">시계</a>
+            <a href="accessories.html">액세서리</a>
         </div>
     </header>
 
-    <section class="brand-intro">
-        <div class="brand-intro-content">
-
+    <section class="logo-banner">
+        <img src="poster.jpg" alt="Logo Banner" class="logo-banner-img">
+        <div class="logo-banner-text">
+            시루샵은 중국 광저우에 위치해 있으며<br>
+            현지 공장과 1:1 직접 주문 시스템을 통해<br>
+            정품과 동일한 고급 가죽과 원단을 사용하고<br>
+            금속 장식은 디테일한 로고 처리와<br>
+            특수 도금 니켈 소재로 제작되며<br>
+            모든 제품은 정품 샘플을 기준으로 만들고<br>
+            엄격한 3단계 검품을 통해 <br>
+            품질을 보장한 후 고객님에게 제공됩니다
         </div>
     </section>
 
@@ -916,9 +1198,25 @@
             </div>
         </div>
         <div class="shop-all-container">
-            <a href="#" class="shop-all-btn">전체보기</a>
+            <a href="all.html" class="shop-all-btn">전체보기</a>
         </div>
     </section>
+
+    <a href="#" class="kakao-button" onclick="alert('카카오톡 상담이 연결됩니다.')">
+        <img src="카톡.png" alt="KakaoTalk">
+    </a>
+
+    <a href="#" class="line-button" onclick="alert('라인 상담이 연결됩니다.')">
+        <img src="라인.png" alt="Line">
+    </a>
+
+    <a href="#" class="telegram-button" onclick="alert('텔레그램 상담이 연결됩니다.')">
+        <img src="텔레그램.png" alt="Telegram">
+    </a>
+
+    <div class="scroll-to-top">
+        <span class="material-icons">arrow_upward</span>
+    </div>
 
     <script>
         // 스크롤 시 헤더 스타일 변경
@@ -931,6 +1229,22 @@
                 header.style.backgroundColor = '#ffffff';
                 header.style.boxShadow = 'none';
             }
+
+            // 스크롤 투 탑 버튼 표시/숨김
+            const scrollToTop = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 200) {
+                scrollToTop.classList.add('visible');
+            } else {
+                scrollToTop.classList.remove('visible');
+            }
+        });
+
+        // 스크롤 투 탑 버튼 클릭 이벤트
+        document.querySelector('.scroll-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // 상단 메뉴 토글
@@ -951,6 +1265,12 @@
                 dropdownMenu.classList.remove('active');
                 body.classList.remove('menu-open');
             });
+        });
+
+        // 전체보기 버튼 클릭
+        document.querySelector('.shop-all-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'all.html';
         });
     </script>
 </body>
